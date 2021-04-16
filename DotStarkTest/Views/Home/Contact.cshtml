@@ -1,54 +1,64 @@
 ﻿@model ContactUsViewModel
 @{
-    ViewData["Title"] = "Contact";
+   ViewData["Title"] = "Contact";
 }
-<h2>@ViewData["Title"]</h2>
-<h3>@ViewData["Message"]</h3>
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
-<form action="@Url.Action("Contact","Home")" method="post" id="form">
+<h3>@ViewBag.Message</h3>
+<div class="col-md-12">
+
+
     <div class="row">
-        <div class="col-md-12">
-            <div class="row">
-                <div class="col-md-2"><label>Name:</label></div>
-                <div class="col-md-10">
-                    @Html.TextBoxFor(x => Model.Name, "", new { @class = "form-control", placeholder = "Full Name", required = "required" })
-                    @Html.ValidationMessageFor(x => x.Name)
-
-                </div>
-                <div class="col-md-2"><label>Email:</label></div>
-                <div class="col-md-10">
-                    @Html.TextBoxFor(x => Model.Email, "", new { @class = "form-control", placeholder = "Email", required = "required", type = "email" })
-                    @Html.ValidationMessageFor(x => x.Email)
-                </div>
-                <div class="col-md-2"><label>Phone:</label></div>
-                <div class="col-md-10">
-                    @Html.TextBoxFor(x => Model.Contact, "", new { @class = "form-control", placeholder = "Contact", required = "required", type = "Number", min = "0" })
-                    @Html.ValidationMessageFor(x => x.Contact)
-                </div>
-                <div class="col-md-2"><label>Purpose:</label></div>
-                <div class="col-md-10">
-                    @Html.TextBoxFor(x => Model.Porpose, "", new { @class = "form-control", placeholder = "Purpose", required = "required" })
-                    @Html.ValidationMessageFor(x => x.Porpose)
-                </div>
-                <div class="col-md-2"><label>Description:</label></div>
-                <div class="col-md-10">
-                    @Html.TextAreaFor(x => Model.Description, new { @class = "form-control", placeholder = "Full Description", required = "required" })
-                    @Html.ValidationMessageFor(x => x.Description)
-                </div>
-                <div class="col-md-offset-10"><input type="submit" value="Submit" class="btn btn-info" /></div>
 
 
-            </div>
+        <div class="col-md-4">
+            <h4>Address.</h4> <address>
+                One Microsoft Way<br />
+                Redmond, WA 98052-6399<br />
+                <abbr title="Phone">P:</abbr>
+                425.555.0100
+            </address>
+
+            <address>
+                <strong>Support:</strong> <a href="mailto:Support@example.com">Support@example.com</a><br />
+                <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
+            </address>
+        </div>
+        <div class="col-md-8">
+            <form action="@Url.Action("Contact","Home")" method="post" id="form">
+
+                <div class="row">
+                    <div class="form-group col-md-2"><label>Name:</label></div>
+                    <div class="form-group col-md-10">
+                        @Html.TextBoxFor(x => Model.Name, "", new { @class = "form-control", placeholder = "Full Name", required = "required" })
+                        @Html.ValidationMessageFor(x => x.Name)
+
+                    </div>
+                    <div class="form-group col-md-2"><label>Email:</label></div>
+                    <div class="form-group col-md-10">
+                        @Html.TextBoxFor(x => Model.Email, "", new { @class = "form-control", placeholder = "Email", required = "required", pattern= @"[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2, 4}$", type = "email" })
+                        @Html.ValidationMessageFor(x => x.Email)
+                    </div>
+                    <div class="form-group col-md-2"><label>Phone:</label></div>
+                    <div class="form-group col-md-10">
+                        @Html.TextBoxFor(x => Model.Contact, "", new { @class = "form-control", placeholder = "Contact", required = "required", pattern= "[0-9]{10}" })
+                        @Html.ValidationMessageFor(x => x.Contact)
+                    </div>
+                    <div class="form-group col-md-2"><label>Purpose:</label></div>
+                    <div class="form-group col-md-10">
+                        @Html.TextBoxFor(x => Model.Porpose, "", new { @class = "form-control", placeholder = "Purpose", required = "required" })
+                        @Html.ValidationMessageFor(x => x.Porpose)
+                    </div>
+                    <div class="form-group col-md-2"><label>Description:</label></div>
+                    <div class="form-group col-md-10">
+                        @Html.TextAreaFor(x => Model.Description, new { @class = "form-control", placeholder = "Full Description", required = "required" })
+                        @Html.ValidationMessageFor(x => x.Description)
+                    </div>
+                    <div class="col-md-offset-10"><input type="submit" value="Submit" class="btn btn-info" /></div>
+
+
+                </div>
+            </form>
         </div>
     </div>
-</form>
-<address>
-    <strong>Support:</strong> <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+
+</div>

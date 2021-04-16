@@ -8,13 +8,12 @@ namespace DotStarkTest.Models
 {
     public class ContactUsViewModel
     {
-        [Required(AllowEmptyStrings =false,ErrorMessage ="Please Enter Name")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Please Enter Name")]
+
         public string Name { get; set; }
-        [Required(AllowEmptyStrings =false,ErrorMessage ="Please Enter Name")]
-        [RegularExpression(pattern: "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2, 4}$",ErrorMessage ="Enter Valid Email Address")]
+        [Required(AllowEmptyStrings =false,ErrorMessage ="Please Enter Email")]
         public string Email { get; set; }
-        [Required(AllowEmptyStrings =false,ErrorMessage ="Please Enter Name")]
-        [RegularExpression(pattern: "[0-9]{10}", ErrorMessage ="Enter Phone Number")]
+        [Required(AllowEmptyStrings =false,ErrorMessage ="Please Enter Phone number")]
         public long Contact { get; set; }
         [Required(AllowEmptyStrings =false,ErrorMessage ="Please Enter Porpose")]
         public string Porpose { get; set; }

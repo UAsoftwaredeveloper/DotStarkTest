@@ -27,28 +27,35 @@ namespace DotStarkTest.Controllers
 
         public IActionResult Contact()
         {
-            ViewData["Message"] = "Your contact page.";
+            ViewData["Message"] = "contact us.";
 
             return View(new ContactUsViewModel());
         }
         [HttpPost]
         public IActionResult Contact(ContactUsViewModel contactUsViewModel)
         {
-            BusinessLogic.BusinessLogic businessLogic = new BusinessLogic.BusinessLogic();
-            ContactUs contactUs = new ContactUs
+            try
             {
-                Name = contactUsViewModel.Name,
-                Email = contactUsViewModel.Email,
-                Contact = contactUsViewModel.Contact,
-                Porpose = contactUsViewModel.Porpose,
-                Description = contactUsViewModel.Description
-            };
-            int saveResult = businessLogic.InsertContactDetail(contactUs);
-            string mailMessage = businessLogic.SendMail(contactUsViewModel.Email, ConstantFields.SenderMail,contactUsViewModel.Description,contactUsViewModel.Porpose);
+                BusinessLogic.BusinessLogic businessLogic = new BusinessLogic.BusinessLogic();
+                ContactUs contactUs = new ContactUs
+                {
+                    Name = contactUsViewModel.Name,
+                    Email = contactUsViewModel.Email,
+                    Contact = contactUsViewModel.Contact,
+                    Porpose = contactUsViewModel.Porpose,
+                    Description = contactUsViewModel.Description
+                };
+                int saveResult = businessLogic.InsertContactDetail(contactUs);
+                string mailMessage = businessLogic.SendMail(contactUsViewModel.Email, ConstantFields.SenderMail, contactUsViewModel.Description, contactUsViewModel.Porpose);
 
-            ViewData["Message"] = saveResult > 0 ? "Thank You For Contacting Us":"!Sorry currently we unable to capture your request" ;
-
-            return View();
+                ViewBag.Message = saveResult > 0 ? "Thank You For Contacting Us" : "!Sorry currently we unable to capture your request";
+                return View(contactUsViewModel);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            
         }
 
         public IActionResult Privacy()
